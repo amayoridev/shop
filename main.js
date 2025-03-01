@@ -39,7 +39,7 @@ app.use(
 );
 app.get("/", (req, res) => {
   if(!req.session.user){
-    res.redirect(/login);
+    res.redirect("/login");
   } else if(req.session.user){
     res.sendFile(__dirname + "/public/userOrder.html");
   } else {
