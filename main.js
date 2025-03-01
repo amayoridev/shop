@@ -38,10 +38,12 @@ app.use(
   })
 );
 app.get("/", (req, res) => {
-  if(req.session.user){
+  if(!req.session.user){
+    res.redirect(/login);
+  } else if(req.session.user){
     res.sendFile(__dirname + "/public/userOrder.html");
-  } else{
-    res.redirect("/login").status(401);
+  } else {
+    res.send(`Unknown error.`)
   }
 });
 app.post('/api/orders', async (req, res) => {
