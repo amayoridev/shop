@@ -38,7 +38,11 @@ app.use(
   })
 );
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/userOrder.html");
+  if(req.session.user){
+    res.sendFile(__dirname + "/public/userOrder.html");
+  } else{
+    res.redirect("/login").status(401);
+  }
 });
 app.post('/api/orders', async (req, res) => {
   try {
